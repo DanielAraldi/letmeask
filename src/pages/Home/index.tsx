@@ -1,8 +1,10 @@
+import '../../styles/auth.scss';
+
 import { GOOGLE_ICON, ILLUSTRATION, LOGO } from '../../config';
 
 export function Home() {
   return (
-    <div>
+    <div id='page-auth'>
       <aside>
         <img
           src={ILLUSTRATION}
@@ -15,15 +17,15 @@ export function Home() {
       </aside>
 
       <main>
-        <div>
+        <div className='main-content'>
           <img src={LOGO} alt='Letmeask' />
 
-          <button>
+          <button className='create-room'>
             <img src={GOOGLE_ICON} alt='Logo do Google' />
             Crie sua sala com o Google
           </button>
 
-          <div>ou entre em uma sala</div>
+          <div className='separator'>ou entre em uma sala</div>
 
           <form>
             <input type='text' placeholder='Digite o código da sala' />

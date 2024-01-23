@@ -1,3 +1,5 @@
+import './styles/global.scss';
+
 import { Home } from './pages';
 
 function App() {
