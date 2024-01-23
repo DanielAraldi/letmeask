@@ -1,9 +1,9 @@
 import './styles/global.scss';
 
-import { NewRoom } from './pages';
+import { Router } from './routes';
 
 function App() {
-  return <NewRoom />;
+  return <Router />;
 }
 
 export default App;

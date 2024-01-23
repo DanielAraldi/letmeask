@@ -102,6 +102,10 @@
 
       a {
         color: #e559f9;
+
+        &:hover {
+          filter: brightness(0.9);
+        }
       }
     }
   }
