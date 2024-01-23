@@ -1,5 +1,6 @@
 import '../../styles/auth.scss';
 
+import { Button } from '../../components';
 import { GOOGLE_ICON, ILLUSTRATION, LOGO } from '../../config';
 
 export function Home() {
@@ -30,7 +31,7 @@ export function Home() {
           <form>
             <input type='text' placeholder='Digite o código da sala' />
 
-            <button type='submit'>Entrar na sala</button>
+            <Button type='submit'>Entrar na sala</Button>
           </form>
         </div>
       </main>

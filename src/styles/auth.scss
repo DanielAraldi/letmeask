@@ -24,7 +24,9 @@
     strong {
       margin-top: 1rem;
 
-      font: 700 2.25rem 'Poppins', sans-serif;
+      font:
+        700 2.25rem 'Poppins',
+        sans-serif;
       line-height: 2.625rem;
     }
 
@@ -79,7 +81,8 @@
         margin-top: 1rem;
       }
 
-      button, input {
+      button,
+      input {
         width: 100%;
       }
     }
