@@ -1,5 +1,10 @@
 import { FirebaseOptions, initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+} from 'firebase/auth';
 import { getDatabase } from 'firebase/database';
 
 import { env } from './env';
@@ -16,5 +21,13 @@ const firebaseOptions: FirebaseOptions = {
 
 const app = initializeApp(firebaseOptions);
 
-export const auth = getAuth(app);
-export const database = getDatabase(app);
+const auth = getAuth(app);
+const database = getDatabase(app);
+
+export {
+  auth,
+  database,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+};

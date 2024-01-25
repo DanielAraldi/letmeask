@@ -1,4 +1,5 @@
 import ANSWER from '../assets/images/answer.svg';
+import AVATAR from '../assets/images/avatar.svg';
 import CHECK from '../assets/images/check.svg';
 import COPY from '../assets/images/copy.svg';
 import DELETE from '../assets/images/delete.svg';
@@ -10,6 +11,7 @@ import LOGO from '../assets/images/logo.svg';
 
 export {
   ANSWER,
+  AVATAR,
   CHECK,
   COPY,
   DELETE,
