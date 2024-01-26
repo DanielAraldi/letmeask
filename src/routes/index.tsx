@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { AuthProvider } from '../contexts';
-import { Home, NewRoom } from '../pages';
+import { Home, NewRoom, Room } from '../pages';
 
 export function Router() {
   return (
@@ -10,6 +10,7 @@ export function Router() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/rooms/new' element={<NewRoom />} />
+          <Route path='/rooms/:id' element={<Room />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
