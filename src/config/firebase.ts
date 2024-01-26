@@ -5,7 +5,13 @@ import {
   onAuthStateChanged,
   signInWithPopup,
 } from 'firebase/auth';
-import { getDatabase } from 'firebase/database';
+import {
+  child as databaseChild,
+  get as databaseGet,
+  getDatabase,
+  push as databasePush,
+  ref as databaseRef,
+} from 'firebase/database';
 
 import { env } from './env';
 
@@ -27,6 +33,10 @@ const database = getDatabase(app);
 export {
   auth,
   database,
+  databaseChild,
+  databaseGet,
+  databasePush,
+  databaseRef,
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithPopup,
