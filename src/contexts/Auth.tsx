@@ -22,25 +22,6 @@ export function AuthProvider({ children }: Required<PropsWithChildren>) {
     return value ? JSON.parse(value) : false;
   }
 
-  function updateUserIfAlreadySignIn(): void {
-    const unsubscribe = onAuthStateChanged(auth, userState => {
-      if (userState) {
-        const { displayName, photoURL, uid } = userState;
-        handleUserStateLogged(true);
-        setUser({
-          id: uid,
-          name: displayName || 'Anônimo',
-          avatar: photoURL,
-        });
-      } else {
-        handleUserStateLogged(false);
-        setUser(null);
-      }
-    });
-
-    unsubscribe();
-  }
-
   async function signInWithGoogle(): Promise<void> {
     try {
       const provider = new GoogleAuthProvider();
@@ -61,7 +42,26 @@ export function AuthProvider({ children }: Required<PropsWithChildren>) {
     }
   }
 
-  useEffect(() => updateUserIfAlreadySignIn(), []);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, userState => {
+      if (userState) {
+        const { displayName, photoURL, uid } = userState;
+        handleUserStateLogged(true);
+        setUser({
+          id: uid,
+          name: displayName || 'Anônimo',
+          avatar: photoURL,
+        });
+      } else {
+        handleUserStateLogged(false);
+        setUser(null);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, isSignedIn, signInWithGoogle }}>
