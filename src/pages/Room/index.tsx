@@ -1,19 +1,59 @@
 import '../../styles/room.scss';
 
+import { FormEvent, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Button, RoomCode } from '../../components';
-import { LOGO } from '../../config';
+import {
+  AVATAR,
+  database,
+  databasePush,
+  databaseRef,
+  LOGO,
+} from '../../config';
+import { useAuth } from '../../hooks';
 
 export function Room() {
+  const { user } = useAuth();
   const params = useParams();
+
+  const [newQuestion, setNewQuestion] = useState<string>('');
+
+  const roomId = params.id!;
+  const isTextareaEmpty = !newQuestion.trim();
+
+  async function handleSendQuestion(
+    event: FormEvent<HTMLFormElement>,
+  ): Promise<void> {
+    event.preventDefault();
+
+    if (isTextareaEmpty) return;
+    if (!user) {
+      return window.alert('You must be logged in!');
+    }
+
+    const question = {
+      content: newQuestion.trim(),
+      author: {
+        name: user.name,
+        avatar: user.avatar,
+      },
+      isHighlighted: false,
+      isAnswered: false,
+    };
+
+    const questionsRef = databaseRef(database, `rooms/${roomId}/questions`);
+    await databasePush(questionsRef, question);
+
+    setNewQuestion('');
+  }
 
   return (
     <div id='page-room'>
       <header>
         <div className='content'>
           <img src={LOGO} alt='Letmeask' />
-          <RoomCode code={params.id!} />
+          <RoomCode code={roomId} />
         </div>
       </header>
 
@@ -23,15 +63,29 @@ export function Room() {
           <span>4 perguntas</span>
         </div>
 
-        <form>
-          <textarea placeholder='O que você quer perguntar?' />
+        <form onSubmit={async event => await handleSendQuestion(event)}>
+          <textarea
+            value={newQuestion}
+            placeholder='O que você quer perguntar?'
+            onChange={event => setNewQuestion(event.target.value)}
+          />
 
           <div className='form-footer'>
-            <span>
-              Para enviar uma pergunta, <button>faça seu login.</button>
-            </span>
+            {user ? (
+              <div className='user-info'>
+                <img src={user.avatar || AVATAR} alt={user.name} />
 
-            <Button type='submit'>Enviar pergunta</Button>
+                <span>{user.name}</span>
+              </div>
+            ) : (
+              <span>
+                Para enviar uma pergunta, <button>faça seu login.</button>
+              </span>
+            )}
+
+            <Button type='submit' disabled={isTextareaEmpty || !user}>
+              Enviar pergunta
+            </Button>
           </div>
         </form>
       </main>

@@ -82,6 +82,10 @@
 
         border: 1px solid #a8a8b3;
         border-radius: 8px;
+
+        &:focus {
+          outline: #e559f9 solid 0.125rem;
+        }
       }
 
       button {
