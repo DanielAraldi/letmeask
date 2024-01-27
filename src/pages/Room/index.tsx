@@ -1,8 +1,9 @@
 import '../../styles/room.scss';
 
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { FirebaseQuestionsProps, QuestionProps } from '../../@types';
 import { Button, RoomCode } from '../../components';
 import {
   AVATAR,
@@ -10,6 +11,7 @@ import {
   databasePush,
   databaseRef,
   LOGO,
+  onValueInDatabase,
 } from '../../config';
 import { useAuth } from '../../hooks';
 
@@ -17,7 +19,9 @@ export function Room() {
   const { user } = useAuth();
   const params = useParams();
 
+  const [title, setTitle] = useState<string>('');
   const [newQuestion, setNewQuestion] = useState<string>('');
+  const [questions, setQuestions] = useState<QuestionProps[]>([]);
 
   const roomId = params.id!;
   const isTextareaEmpty = !newQuestion.trim();
@@ -48,6 +52,22 @@ export function Room() {
     setNewQuestion('');
   }
 
+  useEffect(() => {
+    const roomRef = databaseRef(database, `rooms/${roomId}`);
+
+    onValueInDatabase(roomRef, room => {
+      const roomValue = room.val();
+      const questions: FirebaseQuestionsProps = roomValue.questions ?? {};
+      const parsedQuestions = Object.entries(questions).map(([key, value]) => ({
+        id: key,
+        ...value,
+      }));
+
+      setTitle(roomValue.title);
+      setQuestions(parsedQuestions);
+    });
+  }, [roomId]);
+
   return (
     <div id='page-room'>
       <header>
@@ -59,8 +79,11 @@ export function Room() {
 
       <main>
         <div className='room-title'>
-          <h1>Sala React</h1>
-          <span>4 perguntas</span>
+          <h1>Sala {title}</h1>
+
+          {questions.length && (
+            <span>4 {questions.length === 1 ? 'pergunta' : 'perguntas'}</span>
+          )}
         </div>
 
         <form onSubmit={async event => await handleSendQuestion(event)}>
@@ -88,6 +111,8 @@ export function Room() {
             </Button>
           </div>
         </form>
+
+        {JSON.stringify(questions)}
       </main>
     </div>
   );

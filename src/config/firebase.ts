@@ -9,6 +9,7 @@ import {
   child as databaseChild,
   get as databaseGet,
   getDatabase,
+  onValue as onValueInDatabase,
   push as databasePush,
   ref as databaseRef,
 } from 'firebase/database';
@@ -39,5 +40,6 @@ export {
   databaseRef,
   GoogleAuthProvider,
   onAuthStateChanged,
+  onValueInDatabase,
   signInWithPopup,
 };
