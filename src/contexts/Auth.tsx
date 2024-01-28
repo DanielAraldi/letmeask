@@ -7,10 +7,13 @@ import {
   onAuthStateChanged,
   signInWithPopup,
 } from '../config';
+import { useToast } from '../hooks';
 
 export const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthProvider({ children }: Required<PropsWithChildren>) {
+  const { showErrorAlert } = useToast();
+
   const [user, setUser] = useState<UserProps | null>(null);
 
   function handleUserStateLogged(state: boolean): void {
@@ -37,6 +40,7 @@ export function AuthProvider({ children }: Required<PropsWithChildren>) {
         });
       }
     } catch (error) {
+      showErrorAlert('Sua autenticação falhou, tente novamente!');
       handleUserStateLogged(false);
       setUser(null);
     }
@@ -53,6 +57,7 @@ export function AuthProvider({ children }: Required<PropsWithChildren>) {
           avatar: photoURL,
         });
       } else {
+        showErrorAlert('Sua autenticação falhou, tente novamente!');
         handleUserStateLogged(false);
         setUser(null);
       }
