@@ -3,7 +3,11 @@ import '../../styles/room.scss';
 import { FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { FirebaseQuestionsProps, QuestionProps } from '../../@types';
+import {
+  FirebaseQuestionsProps,
+  QuestionProps,
+  RoomParamsProps,
+} from '../../@types';
 import { Button, RoomCode } from '../../components';
 import {
   AVATAR,
@@ -17,13 +21,13 @@ import { useAuth } from '../../hooks';
 
 export function Room() {
   const { user } = useAuth();
-  const params = useParams();
+  const params = useParams<keyof RoomParamsProps>();
 
   const [title, setTitle] = useState<string>('');
   const [newQuestion, setNewQuestion] = useState<string>('');
   const [questions, setQuestions] = useState<QuestionProps[]>([]);
 
-  const roomId = params.id!;
+  const roomId = params.id;
   const isTextareaEmpty = !newQuestion.trim();
 
   async function handleSendQuestion(
@@ -73,7 +77,8 @@ export function Room() {
       <header>
         <div className='content'>
           <img src={LOGO} alt='Letmeask' />
-          <RoomCode code={roomId} />
+
+          <RoomCode code={roomId!} />
         </div>
       </header>
 
