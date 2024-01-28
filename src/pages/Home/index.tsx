@@ -13,10 +13,11 @@ import {
   ILLUSTRATION,
   LOGO,
 } from '../../config';
-import { useAuth } from '../../hooks';
+import { useAuth, useToast } from '../../hooks';
 
 export function Home() {
   const navigate = useNavigate();
+  const { showErrorAlert } = useToast();
   const { signInWithGoogle, isSignedIn, user } = useAuth();
 
   const [roomCode, setRoomCode] = useState<string>('');
@@ -42,7 +43,7 @@ export function Home() {
     );
 
     if (!room.exists()) {
-      window.alert('Room does not exist.');
+      showErrorAlert('Está sala não existe!');
     } else {
       navigate(`/rooms/${roomCode}`);
     }

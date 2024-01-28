@@ -17,10 +17,11 @@ import {
   LOGO,
   onValueInDatabase,
 } from '../../config';
-import { useAuth } from '../../hooks';
+import { useAuth, useToast } from '../../hooks';
 
 export function Room() {
   const { user } = useAuth();
+  const { showErrorAlert } = useToast();
   const params = useParams<keyof RoomParamsProps>();
 
   const [title, setTitle] = useState<string>('');
@@ -37,7 +38,9 @@ export function Room() {
 
     if (isTextareaEmpty) return;
     if (!user) {
-      return window.alert('You must be logged in!');
+      return showErrorAlert(
+        'Somente usuário logados podem enviar uma pergunta',
+      );
     }
 
     const question = {

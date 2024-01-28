@@ -2,9 +2,13 @@ import '../../styles/room-code.scss';
 
 import { RoomCodeProps } from '../../@types';
 import { COPY } from '../../config';
+import { useToast } from '../../hooks';
 
 export function RoomCode({ code }: RoomCodeProps) {
+  const { showSuccessAlert } = useToast();
+
   function copyRoomCodeToClipboard(): void {
+    showSuccessAlert('Código da sala copiado!');
     navigator.clipboard.writeText(code);
   }
 
