@@ -45,6 +45,9 @@ export function Home() {
     if (!room.exists()) {
       showErrorAlert('Está sala não existe!');
     } else {
+      if (room.val().closedAt) {
+        return showErrorAlert('Sala já foi encerrada!');
+      }
       navigate(`/rooms/${roomCode}`);
     }
   }

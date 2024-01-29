@@ -1,6 +1,6 @@
 import '../../styles/room.scss';
 
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { RoomParamsProps } from '../../@types';
 import { Button, Question, RoomCode } from '../../components';
@@ -8,16 +8,27 @@ import {
   database,
   databaseRef,
   databaseRemove,
+  databaseUpdate,
   DELETE,
   LOGO,
 } from '../../config';
 import { useRoom } from '../../hooks';
 
 export function AdminRoom() {
+  const navigate = useNavigate();
   const params = useParams<keyof RoomParamsProps>();
   const roomId = params.id!;
 
   const { questions, title } = useRoom(roomId);
+
+  async function handleEndRoom(): Promise<void> {
+    const roomRef = databaseRef(database, `rooms/${roomId}`);
+    await databaseUpdate(roomRef, {
+      closedAt: new Date(),
+    });
+
+    navigate('/');
+  }
 
   async function handleDeleteQuestion(questionId: string): Promise<void> {
     if (window.confirm('Você tem certeza que deseja excluir essa pergunta?')) {
@@ -38,7 +49,9 @@ export function AdminRoom() {
           <div>
             <RoomCode code={roomId} />
 
-            <Button isOutlined>Encerrar sala</Button>
+            <Button isOutlined onClick={async () => await handleEndRoom()}>
+              Encerrar sala
+            </Button>
           </div>
         </div>
       </header>

@@ -13,6 +13,7 @@ import {
   push as databasePush,
   ref as databaseRef,
   remove as databaseRemove,
+  update as databaseUpdate,
 } from 'firebase/database';
 
 import { env } from './env';
@@ -40,6 +41,7 @@ export {
   databasePush,
   databaseRef,
   databaseRemove,
+  databaseUpdate,
   GoogleAuthProvider,
   onAuthStateChanged,
   onValueInDatabase,
