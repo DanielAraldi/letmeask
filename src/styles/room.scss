@@ -25,6 +25,8 @@
 
     margin: 0 auto;
 
+    padding-bottom: 1.5rem;
+
     .room-title {
       display: flex;
 
@@ -120,6 +122,10 @@
           }
         }
       }
+    }
+
+    .question-list {
+      margin-top: 2rem;
     }
   }
 }

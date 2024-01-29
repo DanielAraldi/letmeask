@@ -1,9 +1,9 @@
 export interface AuthorProps {
   name: string;
-  avatar: string;
+  avatar?: string;
 }
 
-export interface QuestionProps {
+export interface ParsedQuestionProps {
   id: string;
   content: string;
   author: AuthorProps;
@@ -11,4 +11,7 @@ export interface QuestionProps {
   isAnswered: boolean;
 }
 
-export type FirebaseQuestionsProps = Record<string, Omit<QuestionProps, 'id'>>;
+export type FirebaseQuestionsProps = Record<
+  string,
+  Omit<ParsedQuestionProps, 'id'>
+>;

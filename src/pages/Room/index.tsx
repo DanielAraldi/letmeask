@@ -5,10 +5,10 @@ import { useParams } from 'react-router-dom';
 
 import {
   FirebaseQuestionsProps,
-  QuestionProps,
+  ParsedQuestionProps,
   RoomParamsProps,
 } from '../../@types';
-import { Button, RoomCode } from '../../components';
+import { Button, Question, RoomCode } from '../../components';
 import {
   AVATAR,
   database,
@@ -26,7 +26,7 @@ export function Room() {
 
   const [title, setTitle] = useState<string>('');
   const [newQuestion, setNewQuestion] = useState<string>('');
-  const [questions, setQuestions] = useState<QuestionProps[]>([]);
+  const [questions, setQuestions] = useState<ParsedQuestionProps[]>([]);
 
   const roomId = params.id;
   const isTextareaEmpty = !newQuestion.trim();
@@ -119,6 +119,12 @@ export function Room() {
             </Button>
           </div>
         </form>
+
+        <div className='question-list'>
+          {questions.map(({ id, ...rest }) => (
+            <Question key={id} {...rest} />
+          ))}
+        </div>
       </main>
     </div>
   );
