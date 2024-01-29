@@ -1,9 +1,15 @@
 import '../../styles/question.scss';
 
+import { PropsWithChildren } from 'react';
+
 import { QuestionProps } from '../../@types';
 import { AVATAR } from '../../config';
 
-export function Question({ author, content }: QuestionProps) {
+export function Question({
+  author,
+  content,
+  children,
+}: PropsWithChildren<QuestionProps>) {
   return (
     <div className='question'>
       <p>{content}</p>
@@ -15,7 +21,7 @@ export function Question({ author, content }: QuestionProps) {
           <span>{author.name}</span>
         </div>
 
-        <div></div>
+        <div>{children}</div>
       </footer>
     </div>
   );
