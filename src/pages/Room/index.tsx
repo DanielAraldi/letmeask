@@ -1,13 +1,9 @@
 import '../../styles/room.scss';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import {
-  FirebaseQuestionsProps,
-  ParsedQuestionProps,
-  RoomParamsProps,
-} from '../../@types';
+import { RoomParamsProps } from '../../@types';
 import { Button, Question, RoomCode } from '../../components';
 import {
   AVATAR,
@@ -15,20 +11,19 @@ import {
   databasePush,
   databaseRef,
   LOGO,
-  onValueInDatabase,
 } from '../../config';
-import { useAuth, useToast } from '../../hooks';
+import { useAuth, useRoom, useToast } from '../../hooks';
 
 export function Room() {
-  const { user } = useAuth();
-  const { showErrorAlert } = useToast();
   const params = useParams<keyof RoomParamsProps>();
+  const roomId = params.id!;
 
-  const [title, setTitle] = useState<string>('');
+  const { user } = useAuth();
+  const { questions, title } = useRoom(roomId);
+  const { showErrorAlert } = useToast();
+
   const [newQuestion, setNewQuestion] = useState<string>('');
-  const [questions, setQuestions] = useState<ParsedQuestionProps[]>([]);
 
-  const roomId = params.id;
   const isTextareaEmpty = !newQuestion.trim();
 
   async function handleSendQuestion(
@@ -59,29 +54,13 @@ export function Room() {
     setNewQuestion('');
   }
 
-  useEffect(() => {
-    const roomRef = databaseRef(database, `rooms/${roomId}`);
-
-    onValueInDatabase(roomRef, room => {
-      const roomValue = room.val();
-      const questions: FirebaseQuestionsProps = roomValue.questions ?? {};
-      const parsedQuestions = Object.entries(questions).map(([key, value]) => ({
-        id: key,
-        ...value,
-      }));
-
-      setTitle(roomValue.title);
-      setQuestions(parsedQuestions);
-    });
-  }, [roomId]);
-
   return (
     <div id='page-room'>
       <header>
         <div className='content'>
           <img src={LOGO} alt='Letmeask' />
 
-          <RoomCode code={roomId!} />
+          <RoomCode code={roomId} />
         </div>
       </header>
 
