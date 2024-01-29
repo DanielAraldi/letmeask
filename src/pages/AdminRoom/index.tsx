@@ -60,7 +60,7 @@ export function AdminRoom() {
         <div className='room-title'>
           <h1>Sala {title}</h1>
 
-          {questions.length && (
+          {questions.length > 0 && (
             <span>4 {questions.length === 1 ? 'pergunta' : 'perguntas'}</span>
           )}
         </div>

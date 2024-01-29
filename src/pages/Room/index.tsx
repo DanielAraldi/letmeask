@@ -90,8 +90,11 @@ export function Room() {
         <div className='room-title'>
           <h1>Sala {title}</h1>
 
-          {questions.length && (
-            <span>4 {questions.length === 1 ? 'pergunta' : 'perguntas'}</span>
+          {questions.length > 0 && (
+            <span>
+              {questions.length}{' '}
+              {questions.length === 1 ? 'pergunta' : 'perguntas'}
+            </span>
           )}
         </div>
 
