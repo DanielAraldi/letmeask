@@ -16,7 +16,7 @@
   footer {
     display: flex;
 
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
 
     margin-top: 1.5rem;
@@ -38,6 +38,37 @@
 
         font-size: 0.875rem;
         color: #737380;
+      }
+    }
+
+    button {
+      border: 0;
+      background: transparent;
+
+      transition: filter 0.2s;
+
+      cursor: pointer;
+
+      &.like-button {
+        display: flex;
+
+        align-items: flex-end;
+
+        gap: 0.5rem;
+
+        color: #737380;
+
+        &.liked {
+          color: #835afd;
+
+          svg path {
+            stroke: #835afd;
+          }
+        }
+      }
+
+      &:hover {
+        filter: brightness(0.7);
       }
     }
   }
