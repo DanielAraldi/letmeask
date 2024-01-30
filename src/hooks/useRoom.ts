@@ -1,10 +1,15 @@
 import { useEffect, useState } from 'react';
 
-import { FirebaseQuestionsProps, ParsedQuestionProps } from '../@types';
+import {
+  FirebaseQuestionsProps,
+  FirebaseRoomProps,
+  ParsedQuestionProps,
+} from '../@types';
+import { RoomHookProps } from '../@types/hooks/useRoom';
 import { database, databaseRef, onValueInDatabase } from '../config';
 import { useAuth } from './useAuth';
 
-export function useRoom(roomId: string) {
+export function useRoom(roomId: string): RoomHookProps {
   const { user } = useAuth();
 
   const [title, setTitle] = useState<string>('');
@@ -14,7 +19,7 @@ export function useRoom(roomId: string) {
     const roomRef = databaseRef(database, `rooms/${roomId}`);
 
     const unsubscribe = onValueInDatabase(roomRef, room => {
-      const roomValue = room.val();
+      const roomValue: FirebaseRoomProps = room.val();
       const questions: FirebaseQuestionsProps = roomValue.questions ?? {};
       const parsedQuestions = Object.entries(questions).map(
         ([key, question]): ParsedQuestionProps => ({

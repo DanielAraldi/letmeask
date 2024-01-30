@@ -27,3 +27,10 @@ export type FirebaseQuestionsProps = Record<
   string,
   Omit<ParsedQuestionProps & FirebaseLikeProps, 'id' | 'likeCount' | 'likeId'>
 >;
+
+export interface FirebaseRoomProps {
+  title: string;
+  authorId: string;
+  questions?: FirebaseQuestionsProps;
+  closedAt?: Date;
+}
