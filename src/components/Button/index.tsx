@@ -1,11 +1,13 @@
 import '../../styles/button.scss';
 
+import cx from 'classnames';
+
 import { ButtonProps } from '../../@types';
 
 export function Button({ isOutlined = false, ...rest }: ButtonProps) {
   return (
     <button
-      className={`button ${isOutlined ? 'outlined' : ''}`}
+      className={cx('button', { outlined: isOutlined })}
       {...rest}
     ></button>
   );

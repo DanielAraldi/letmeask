@@ -1,5 +1,6 @@
 import '../../styles/room.scss';
 
+import cx from 'classnames';
 import { FormEvent, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -134,7 +135,7 @@ export function Room() {
             <Question key={id} isAnswered={isAnswered} {...rest}>
               {!isAnswered && (
                 <button
-                  className={`like-button ${likeId ? 'liked' : ''}`}
+                  className={cx('like-button', { liked: !!likeId })}
                   type='button'
                   aria-label='Marcar como gostei'
                   onClick={async () => await handleLikeQuestion(id, likeId)}
