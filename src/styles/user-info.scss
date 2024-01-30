@@ -1,0 +1,24 @@
+.user-info {
+  display: flex;
+
+  align-items: center;
+
+  img {
+    width: 2rem;
+    height: 2rem;
+
+    border-radius: 50%;
+  }
+
+  span {
+    margin-left: 0.5rem;
+
+    font-size: 0.875rem;
+    color: #737380;
+
+    &.strong {
+      font-weight: 500;
+      color: #29292e;
+    }
+  }
+}

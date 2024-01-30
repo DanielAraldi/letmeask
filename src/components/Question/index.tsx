@@ -4,7 +4,7 @@ import cx from 'classnames';
 import { PropsWithChildren } from 'react';
 
 import { QuestionProps } from '../../@types';
-import { AVATAR } from '../../config';
+import { UserInfo } from '../UserInfo';
 
 export function Question({
   author,
@@ -24,11 +24,7 @@ export function Question({
       <p>{content}</p>
 
       <footer>
-        <div className='user-info'>
-          <img src={author.avatar || AVATAR} alt={author.name} />
-
-          <span>{author.name}</span>
-        </div>
+        <UserInfo name={author.name} avatar={author.avatar || null} />
 
         <div>{children}</div>
       </footer>

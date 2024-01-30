@@ -5,9 +5,8 @@ import { FormEvent, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { RoomParamsProps } from '../../@types';
-import { Button, Header, Question } from '../../components';
+import { Button, Header, Question, UserInfo } from '../../components';
 import {
-  AVATAR,
   database,
   databasePush,
   databaseRef,
@@ -101,11 +100,11 @@ export function Room() {
 
           <div className='form-footer'>
             {user ? (
-              <div className='user-info'>
-                <img src={user.avatar || AVATAR} alt={user.name} />
-
-                <span>{user.name}</span>
-              </div>
+              <UserInfo
+                variant='strong'
+                name={user.name}
+                avatar={user.avatar}
+              />
             ) : (
               <span>
                 Para enviar uma pergunta, <button>faça seu login.</button>
