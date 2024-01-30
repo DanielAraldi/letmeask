@@ -4,7 +4,7 @@ import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { FirebaseRoomProps } from '../../@types';
-import { Button } from '../../components';
+import { Button, InputText } from '../../components';
 import {
   database,
   databaseChild,
@@ -83,8 +83,7 @@ export function Home() {
           <div className='separator'>ou entre em uma sala</div>
 
           <form onSubmit={async event => await handleJoinRoom(event)}>
-            <input
-              type='text'
+            <InputText
               value={roomCode}
               placeholder='Digite o código da sala'
               onChange={event => setRoomCode(event.target.value)}

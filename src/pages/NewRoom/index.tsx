@@ -3,7 +3,7 @@ import '../../styles/auth.scss';
 import { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Button } from '../../components';
+import { Button, InputText } from '../../components';
 import {
   database,
   databasePush,
@@ -57,8 +57,7 @@ export function NewRoom() {
           <h2>Criar uma nova sala</h2>
 
           <form onSubmit={async event => await handleCreateRoom(event)}>
-            <input
-              type='text'
+            <InputText
               value={newRoom}
               placeholder='Nome da sala'
               onChange={event => setNewRoom(event.target.value)}
