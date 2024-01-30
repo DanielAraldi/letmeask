@@ -5,7 +5,13 @@ import { FormEvent, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { RoomParamsProps } from '../../@types';
-import { Button, Header, Question, UserInfo } from '../../components';
+import {
+  Button,
+  Header,
+  Question,
+  RoomTitle,
+  UserInfo,
+} from '../../components';
 import {
   database,
   databasePush,
@@ -80,16 +86,7 @@ export function Room() {
       <Header roomId={roomId} />
 
       <main>
-        <div className='room-title'>
-          <h1>Sala {title}</h1>
-
-          {questions.length > 0 && (
-            <span>
-              {questions.length}{' '}
-              {questions.length === 1 ? 'pergunta' : 'perguntas'}
-            </span>
-          )}
-        </div>
+        <RoomTitle amountQuestions={questions.length} title={title} />
 
         <form onSubmit={async event => await handleSendQuestion(event)}>
           <textarea

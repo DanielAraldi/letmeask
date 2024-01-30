@@ -3,7 +3,7 @@ import '../../styles/room.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { RoomParamsProps } from '../../@types';
-import { Header, Question } from '../../components';
+import { Header, Question, RoomTitle } from '../../components';
 import {
   ANSWER,
   CHECK,
@@ -67,16 +67,7 @@ export function AdminRoom() {
       />
 
       <main>
-        <div className='room-title'>
-          <h1>Sala {title}</h1>
-
-          {questions.length > 0 && (
-            <span>
-              {questions.length}{' '}
-              {questions.length === 1 ? 'pergunta' : 'perguntas'}
-            </span>
-          )}
-        </div>
+        <RoomTitle amountQuestions={questions.length} title={title} />
 
         <div className='question-list'>
           {questions.map(({ id, isAnswered, ...rest }) => (
