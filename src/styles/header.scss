@@ -1,0 +1,31 @@
+.header {
+  padding: 1.5rem;
+
+  border-bottom: 1px solid #e2e2e2;
+
+  .content {
+    display: flex;
+
+    max-width: 70rem;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 0 auto;
+
+    > img {
+      max-height: 2.813rem;
+
+      cursor: pointer;
+    }
+
+    > div {
+      display: flex;
+      gap: 1rem;
+
+      button {
+        height: 2.5rem;
+      }
+    }
+  }
+}

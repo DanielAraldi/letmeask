@@ -2,22 +2,20 @@ import '../../styles/room.scss';
 
 import cx from 'classnames';
 import { FormEvent, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { RoomParamsProps } from '../../@types';
-import { Button, Question, RoomCode } from '../../components';
+import { Button, Header, Question } from '../../components';
 import {
   AVATAR,
   database,
   databasePush,
   databaseRef,
   databaseRemove,
-  LOGO,
 } from '../../config';
 import { useAuth, useRoom, useToast } from '../../hooks';
 
 export function Room() {
-  const navigate = useNavigate();
   const params = useParams<keyof RoomParamsProps>();
   const roomId = params.id!;
 
@@ -28,10 +26,6 @@ export function Room() {
   const [newQuestion, setNewQuestion] = useState<string>('');
 
   const isTextareaEmpty = !newQuestion.trim();
-
-  function navigateToHome(): void {
-    navigate('/');
-  }
 
   async function handleSendQuestion(
     event: FormEvent<HTMLFormElement>,
@@ -84,13 +78,7 @@ export function Room() {
 
   return (
     <div id='page-room'>
-      <header>
-        <div className='content'>
-          <img src={LOGO} alt='Letmeask' onClick={navigateToHome} />
-
-          <RoomCode code={roomId} />
-        </div>
-      </header>
+      <Header roomId={roomId} />
 
       <main>
         <div className='room-title'>

@@ -3,7 +3,7 @@ import '../../styles/room.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { RoomParamsProps } from '../../@types';
-import { Button, Question, RoomCode } from '../../components';
+import { Header, Question } from '../../components';
 import {
   ANSWER,
   CHECK,
@@ -12,7 +12,6 @@ import {
   databaseRemove,
   databaseUpdate,
   DELETE,
-  LOGO,
 } from '../../config';
 import { useRoom } from '../../hooks';
 
@@ -22,10 +21,6 @@ export function AdminRoom() {
   const roomId = params.id!;
 
   const { questions, title } = useRoom(roomId);
-
-  function navigateToHome(): void {
-    navigate('/');
-  }
 
   function getQuestionRef(questionId: string) {
     return databaseRef(database, `rooms/${roomId}/questions/${questionId}`);
@@ -65,19 +60,11 @@ export function AdminRoom() {
 
   return (
     <div id='page-room'>
-      <header>
-        <div className='content'>
-          <img src={LOGO} alt='Letmeask' onClick={navigateToHome} />
-
-          <div>
-            <RoomCode code={roomId} />
-
-            <Button isOutlined onClick={async () => await handleEndRoom()}>
-              Encerrar sala
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Header
+        variant='admin'
+        roomId={roomId}
+        onClick={async () => await handleEndRoom()}
+      />
 
       <main>
         <div className='room-title'>
