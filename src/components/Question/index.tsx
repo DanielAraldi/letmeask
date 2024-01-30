@@ -1,5 +1,6 @@
 import '../../styles/question.scss';
 
+import cx from 'classnames';
 import { PropsWithChildren } from 'react';
 
 import { QuestionProps } from '../../@types';
@@ -9,9 +10,17 @@ export function Question({
   author,
   content,
   children,
+  isAnswered = false,
+  isHighlighted = false,
 }: PropsWithChildren<QuestionProps>) {
   return (
-    <div className='question'>
+    <div
+      className={cx(
+        'question',
+        { answered: isAnswered },
+        { highlighted: isHighlighted && !isAnswered },
+      )}
+    >
       <p>{content}</p>
 
       <footer>
