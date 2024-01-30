@@ -27,7 +27,7 @@ export function AdminRoom() {
       closedAt: new Date(),
     });
 
-    navigate('/');
+    navigate('/', { replace: true });
   }
 
   async function handleDeleteQuestion(questionId: string): Promise<void> {
