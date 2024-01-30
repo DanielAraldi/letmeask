@@ -3,6 +3,7 @@ import '../../styles/auth.scss';
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { FirebaseRoomProps } from '../../@types';
 import { Button } from '../../components';
 import {
   database,
@@ -41,14 +42,16 @@ export function Home() {
     const room = await databaseGet(
       databaseChild(roomsRef, `rooms/${roomCode}`),
     );
+    const roomValue: FirebaseRoomProps = room.val();
 
     if (!room.exists()) {
       showErrorAlert('Está sala não existe!');
     } else {
-      if (room.val().closedAt) {
+      if (roomValue.closedAt) {
         return showErrorAlert('Sala já foi encerrada!');
       }
-      navigate(`/rooms/${roomCode}`);
+      const isAdmin = roomValue.authorId === user?.id;
+      navigate(`${isAdmin ? '/admin' : ''}/rooms/${roomCode}`);
     }
   }
 
