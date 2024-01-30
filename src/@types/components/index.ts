@@ -1,3 +1,4 @@
+export * from './Banner';
 export * from './Button';
 export * from './Header';
 export * from './InputText';

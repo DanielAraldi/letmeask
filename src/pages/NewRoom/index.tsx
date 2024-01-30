@@ -3,14 +3,8 @@ import '../../styles/auth.scss';
 import { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Button, InputText } from '../../components';
-import {
-  database,
-  databasePush,
-  databaseRef,
-  ILLUSTRATION,
-  LOGO,
-} from '../../config';
+import { Banner, Button, InputText } from '../../components';
+import { database, databasePush, databaseRef, LOGO } from '../../config';
 import { useAuth } from '../../hooks';
 
 export function NewRoom() {
@@ -39,16 +33,11 @@ export function NewRoom() {
 
   return (
     <div id='page-auth'>
-      <aside>
-        <img
-          src={ILLUSTRATION}
-          alt='Ilustração simbolizando perguntas e respostas'
-        />
-
-        <strong>Crie salas de Q&amp;A ao-vivo</strong>
-
-        <p>Tire as dúvidas da sua audiência em tempo-real</p>
-      </aside>
+      <Banner
+        description='Tire as dúvidas da sua audiência em tempo-real'
+        title='Crie salas de Q&amp;A ao-vivo'
+        alt='Ilustração simbolizando perguntas e respostas'
+      />
 
       <main>
         <div className='main-content'>

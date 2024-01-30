@@ -4,14 +4,13 @@ import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { FirebaseRoomProps } from '../../@types';
-import { Button, InputText } from '../../components';
+import { Banner, Button, InputText } from '../../components';
 import {
   database,
   databaseChild,
   databaseGet,
   databaseRef,
   GOOGLE_ICON,
-  ILLUSTRATION,
   LOGO,
 } from '../../config';
 import { useAuth, useToast } from '../../hooks';
@@ -57,16 +56,11 @@ export function Home() {
 
   return (
     <div id='page-auth'>
-      <aside>
-        <img
-          src={ILLUSTRATION}
-          alt='Ilustração simbolizando perguntas e respostas'
-        />
-
-        <strong>Crie salas de Q&amp;A ao-vivo</strong>
-
-        <p>Tire as dúvidas da sua audiência em tempo-real</p>
-      </aside>
+      <Banner
+        description='Tire as dúvidas da sua audiência em tempo-real'
+        title='Crie salas de Q&amp;A ao-vivo'
+        alt='Ilustração simbolizando perguntas e respostas'
+      />
 
       <main>
         <div className='main-content'>

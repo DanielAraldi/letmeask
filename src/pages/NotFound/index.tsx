@@ -2,8 +2,8 @@ import '../../styles/auth.scss';
 
 import { useNavigate } from 'react-router-dom';
 
-import { Button } from '../../components';
-import { ILLUSTRATION, LOGO } from '../../config';
+import { Banner, Button } from '../../components';
+import { LOGO } from '../../config';
 
 export function NotFound() {
   const navigate = useNavigate();
@@ -14,16 +14,11 @@ export function NotFound() {
 
   return (
     <div id='page-auth'>
-      <aside>
-        <img
-          src={ILLUSTRATION}
-          alt='Ilustração simbolizando perguntas e respostas'
-        />
-
-        <strong>Ops!! Acho que você se perdeu</strong>
-
-        <p>Infelizmente não nada para fazer por aqui</p>
-      </aside>
+      <Banner
+        description='Infelizmente não nada para fazer por aqui'
+        title='Ops!! Acho que você se perdeu'
+        alt='Ilustração simbolizando perguntas e respostas'
+      />
 
       <main>
         <div className='main-content'>
