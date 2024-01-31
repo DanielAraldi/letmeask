@@ -14,11 +14,11 @@
     margin-left: 0.5rem;
 
     font-size: 0.875rem;
-    color: #737380;
+    color: var(--soft-dark-gray);
 
     &.strong {
       font-weight: 500;
-      color: #29292e;
+      color: var(--black-text);
     }
   }
 }

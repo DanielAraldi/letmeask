@@ -4,9 +4,30 @@
   box-sizing: border-box;
 }
 
+:root {
+  --white: #ffffff;
+  --white-details: #fefefe;
+  --white-background: #f8f8f8;
+  --medium-white: #f4f0ff;
+  --dark-white: #e2e2e2;
+
+  --dark-gray: #737388;
+  --soft-dark-gray: #737380;
+  --medium-gray: #dbdcdd;
+  --gray: #a8a8b3;
+
+  --red: #ea4335;
+  --blue: #835afd;
+
+  --purple: #e559f9;
+
+  --black-text: #29292e;
+  --black-shadow: rgba(0, 0, 0, 0.04);
+}
+
 body {
-  background: #f8f8f8;
-  color: #29292e;
+  background: var(--white-background);
+  color: var(--black-text);
 }
 
 body,
@@ -22,9 +43,9 @@ textarea {
   font-size: 1rem;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
-  color: #29292e;
+  color: var(--black-text);
 
-  background-color: #f8f8f8;
+  background-color: var(--white-background);
 
   border-radius: 8px;
 }

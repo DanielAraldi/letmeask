@@ -1,29 +1,29 @@
 .question {
   padding: 1.5rem;
 
-  background: #fefefe;
+  background: var(--white-details);
   border-radius: 8px;
-  box-shadow: 0 0.125rem 0.75rem rgba(0, 0, 0, 0.04);
+  box-shadow: 0 0.125rem 0.75rem var(--black-shadow);
 
   & + .question {
     margin-top: 0.5rem;
   }
 
   &.highlighted {
-    background: #f4f0ff;
-    border: 1px solid #835afd;
+    background: var(--medium-white);
+    border: 1px solid var(--blue);
 
     footer .user-info span {
-      color: #29292e;
+      color: var(--black-text);
     }
   }
 
   &.answered {
-    background: #dbdcdd;
+    background: var(--medium-gray);
   }
 
   p {
-    color: #29292e;
+    color: var(--black-text);
   }
 
   footer {
@@ -55,13 +55,13 @@
 
         gap: 0.5rem;
 
-        color: #737380;
+        color: var(--soft-dark-gray);
 
         &.liked {
-          color: #835afd;
+          color: var(--blue);
 
           svg path {
-            stroke: #835afd;
+            stroke: var(--blue);
           }
         }
       }

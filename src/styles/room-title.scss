@@ -8,7 +8,7 @@
   h1 {
     font-size: 1.5rem;
     font-family: 'Poppins', sans-serif;
-    color: #29292e;
+    color: var(--black-text);
   }
 
   span {
@@ -18,9 +18,9 @@
 
     font-size: 0.875rem;
     font-weight: 500;
-    color: #fff;
+    color: var(--white);
 
-    background: #e559f9;
+    background: var(--purple);
 
     border-radius: 9999px;
   }

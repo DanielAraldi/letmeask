@@ -14,14 +14,14 @@
         padding: 1rem;
 
         resize: vertical;
-        background: #fefefe;
+        background: var(--white-details);
 
-        box-shadow: 0 0.125rem 0.75rem rgba(0, 0, 0, 0.04);
+        box-shadow: 0 0.125rem 0.75rem var(--black-shadow);
         border: 0;
         border-radius: 8px;
 
         &:focus {
-          outline: #e559f9 solid 0.125rem;
+          outline: var(--purple) solid 0.125rem;
         }
       }
 
@@ -36,13 +36,13 @@
         > span {
           font-size: 0.875rem;
           font-weight: 500;
-          color: #737388;
+          color: var(--dark-gray);
 
           button {
             font-size: 0.875rem;
             font-weight: 500;
             text-decoration: underline;
-            color: #835afd;
+            color: var(--blue);
 
             cursor: pointer;
 

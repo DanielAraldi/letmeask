@@ -7,8 +7,8 @@
 
   padding: 7.5rem 5rem;
 
-  background: #835afd;
-  color: #fff;
+  background: var(--blue);
+  color: var(--white);
 
   img {
     max-width: 20rem;
@@ -29,6 +29,6 @@
     font-size: 1.5rem;
     line-height: 2rem;
 
-    color: #f8f8f8;
+    color: var(--white-background);
   }
 }
