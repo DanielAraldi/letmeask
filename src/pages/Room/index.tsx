@@ -2,7 +2,7 @@ import '../../styles/room.scss';
 
 import cx from 'classnames';
 import { FormEvent, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { RoomParamsProps } from '../../@types';
 import {
@@ -21,6 +21,7 @@ import {
 import { useAuth, useRoom, useToast } from '../../hooks';
 
 export function Room() {
+  const navigate = useNavigate();
   const params = useParams<keyof RoomParamsProps>();
   const roomId = params.id!;
 
@@ -31,6 +32,10 @@ export function Room() {
   const [newQuestion, setNewQuestion] = useState<string>('');
 
   const isTextareaEmpty = !newQuestion.trim();
+
+  function navigateToHome(): void {
+    navigate('/');
+  }
 
   async function handleSendQuestion(
     event: FormEvent<HTMLFormElement>,
@@ -104,7 +109,8 @@ export function Room() {
               />
             ) : (
               <span>
-                Para enviar uma pergunta, <button>faça seu login.</button>
+                Para enviar uma pergunta,{' '}
+                <button onClick={navigateToHome}>faça seu login.</button>
               </span>
             )}
 
