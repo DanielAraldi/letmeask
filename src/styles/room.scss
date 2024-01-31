@@ -56,6 +56,20 @@
 
     .question-list {
       margin-top: 2rem;
+
+      .no-questions {
+        display: flex;
+
+        justify-content: center;
+
+        margin-top: 10rem;
+
+        p {
+          font-size: 1rem;
+          font-weight: 500;
+          color: var(--dark-gray);
+        }
+      }
     }
   }
 }

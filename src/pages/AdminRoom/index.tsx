@@ -70,46 +70,52 @@ export function AdminRoom() {
         <RoomTitle amountQuestions={questions.length} title={title} />
 
         <div className='question-list'>
-          {questions.map(({ id, isAnswered, ...rest }) => (
-            <Question key={id} isAnswered={isAnswered} {...rest}>
-              {!isAnswered && (
-                <>
-                  <button
-                    type='button'
-                    onClick={async () =>
-                      await handleCheckQuestionAsAnswered(id)
-                    }
-                  >
-                    <img
-                      src={CHECK}
-                      alt='Marcar pergunta como respondida'
-                      title='Marcar pergunta como respondida'
-                    />
-                  </button>
-                  <button
-                    type='button'
-                    onClick={async () => await handleHighlightQuestion(id)}
-                  >
-                    <img
-                      src={ANSWER}
-                      alt='Dar destaque à pergunta'
-                      title='Dar destaque à pergunta'
-                    />
-                  </button>
-                </>
-              )}
-              <button
-                type='button'
-                onClick={async () => await handleDeleteQuestion(id)}
-              >
-                <img
-                  src={DELETE}
-                  alt='Remover pergunta'
-                  title='Remover pergunta'
-                />
-              </button>
-            </Question>
-          ))}
+          {questions.length === 0 ? (
+            <div className='no-questions'>
+              <p>Ainda não há perguntas feitas nesta sala</p>
+            </div>
+          ) : (
+            questions.map(({ id, isAnswered, ...rest }) => (
+              <Question key={id} isAnswered={isAnswered} {...rest}>
+                {!isAnswered && (
+                  <>
+                    <button
+                      type='button'
+                      onClick={async () =>
+                        await handleCheckQuestionAsAnswered(id)
+                      }
+                    >
+                      <img
+                        src={CHECK}
+                        alt='Marcar pergunta como respondida'
+                        title='Marcar pergunta como respondida'
+                      />
+                    </button>
+                    <button
+                      type='button'
+                      onClick={async () => await handleHighlightQuestion(id)}
+                    >
+                      <img
+                        src={ANSWER}
+                        alt='Dar destaque à pergunta'
+                        title='Dar destaque à pergunta'
+                      />
+                    </button>
+                  </>
+                )}
+                <button
+                  type='button'
+                  onClick={async () => await handleDeleteQuestion(id)}
+                >
+                  <img
+                    src={DELETE}
+                    alt='Remover pergunta'
+                    title='Remover pergunta'
+                  />
+                </button>
+              </Question>
+            ))
+          )}
         </div>
       </main>
     </div>
