@@ -39,7 +39,7 @@ export function Home() {
 
     const roomsRef = databaseRef(database);
     const room = await databaseGet(
-      databaseChild(roomsRef, `rooms/${roomCode}`),
+      databaseChild(roomsRef, `rooms/${roomCode.trim()}`),
     );
     const roomValue: FirebaseRoomProps = room.val();
 

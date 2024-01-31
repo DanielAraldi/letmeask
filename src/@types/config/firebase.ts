@@ -23,9 +23,14 @@ export interface FirebaseLikeProps {
   likes: LikeProps;
 }
 
+export type FirebaseParsedQuestionProps = Omit<
+  ParsedQuestionProps & FirebaseLikeProps,
+  'id' | 'likeCount' | 'likeId'
+>;
+
 export type FirebaseQuestionsProps = Record<
   string,
-  Omit<ParsedQuestionProps & FirebaseLikeProps, 'id' | 'likeCount' | 'likeId'>
+  FirebaseParsedQuestionProps
 >;
 
 export interface FirebaseRoomProps {
