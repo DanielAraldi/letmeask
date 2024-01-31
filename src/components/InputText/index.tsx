@@ -1,4 +1,4 @@
-import '../../styles/input-text.scss';
+import './input-text.scss';
 
 import { InputTextProps } from '../../@types';
 

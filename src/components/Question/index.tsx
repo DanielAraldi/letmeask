@@ -1,4 +1,4 @@
-import '../../styles/question.scss';
+import './question.scss';
 
 import cx from 'classnames';
 import { PropsWithChildren } from 'react';

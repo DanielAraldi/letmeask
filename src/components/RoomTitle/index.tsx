@@ -1,4 +1,4 @@
-import '../../styles/room-title.scss';
+import './room-title.scss';
 
 import { RoomTitleProps } from '../../@types';
 

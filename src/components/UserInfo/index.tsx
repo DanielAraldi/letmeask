@@ -1,4 +1,4 @@
-import '../../styles/user-info.scss';
+import './user-info.scss';
 
 import cx from 'classnames';
 

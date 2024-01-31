@@ -1,4 +1,4 @@
-import '../../styles/room-code.scss';
+import './room-code.scss';
 
 import { RoomCodeProps } from '../../@types';
 import { COPY } from '../../config';

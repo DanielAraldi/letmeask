@@ -1,4 +1,4 @@
-import '../../styles/button.scss';
+import './button.scss';
 
 import cx from 'classnames';
 

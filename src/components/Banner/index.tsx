@@ -1,4 +1,4 @@
-import '../../styles/banner.scss';
+import './banner.scss';
 
 import { BannerProps } from '../../@types';
 import { ILLUSTRATION } from '../../config';
