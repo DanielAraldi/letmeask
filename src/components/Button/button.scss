@@ -29,6 +29,18 @@
     color: var(--blue);
   }
 
+  &.soft {
+    background: var(--medium-gray);
+    border: 0;
+    color: var(--soft-dark-gray);
+  }
+
+  &.danger {
+    background: var(--light-red);
+    border: 0;
+    color: var(--white-details);
+  }
+
   &:not(:disabled):hover {
     filter: brightness(0.9);
   }

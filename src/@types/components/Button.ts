@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes } from 'react';
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  isOutlined?: boolean;
+  variant?: 'outlined' | 'soft' | 'danger';
 };

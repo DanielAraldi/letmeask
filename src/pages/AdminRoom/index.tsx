@@ -1,9 +1,10 @@
 import '../../styles/room.scss';
 
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { FirebaseParsedQuestionProps, RoomParamsProps } from '../../@types';
-import { Header, Question, RoomTitle } from '../../components';
+import { Header, Modal, Question, RoomTitle } from '../../components';
 import {
   ANSWER,
   CHECK,
@@ -13,6 +14,7 @@ import {
   databaseRemove,
   databaseUpdate,
   DELETE,
+  EMPTY_QUESTIONS,
 } from '../../config';
 import { useRoom } from '../../hooks';
 
@@ -23,6 +25,17 @@ export function AdminRoom() {
 
   const { questions, title } = useRoom(roomId);
 
+  const [questionIdToBeDeleted, setQuestionIdToBeDeleted] =
+    useState<string>('');
+  const [isOpenEndRoomModal, setIsOpenEndRoomModal] = useState<boolean>(false);
+  const [isOpenDeleteQuestionModal, setIsOpenDeleteQuestionModal] =
+    useState<boolean>(false);
+
+  function handleOpenDeleteQuestionModal(questionId: string): void {
+    setQuestionIdToBeDeleted(questionId);
+    setIsOpenDeleteQuestionModal(true);
+  }
+
   function getQuestionRef(questionId: string) {
     return databaseRef(database, `rooms/${roomId}/questions/${questionId}`);
   }
@@ -32,15 +45,15 @@ export function AdminRoom() {
     await databaseUpdate(roomRef, {
       closedAt: new Date(),
     });
+    setIsOpenEndRoomModal(false);
 
     navigate('/', { replace: true });
   }
 
   async function handleDeleteQuestion(questionId: string): Promise<void> {
-    if (window.confirm('Você tem certeza que deseja excluir essa pergunta?')) {
-      const questionRef = getQuestionRef(questionId);
-      await databaseRemove(questionRef);
-    }
+    const questionRef = getQuestionRef(questionId);
+    await databaseRemove(questionRef);
+    setIsOpenDeleteQuestionModal(false);
   }
 
   async function handleCheckQuestionAsAnswered(
@@ -62,63 +75,89 @@ export function AdminRoom() {
   }
 
   return (
-    <div id='page-room'>
-      <Header
-        variant='admin'
-        roomId={roomId}
-        onClick={async () => await handleEndRoom()}
-      />
+    <>
+      <div id='page-room'>
+        <Header
+          variant='admin'
+          roomId={roomId}
+          onClick={() => setIsOpenEndRoomModal(true)}
+        />
 
-      <main>
-        <RoomTitle amountQuestions={questions.length} title={title} />
+        <main>
+          <RoomTitle amountQuestions={questions.length} title={title} />
 
-        <div className='question-list'>
-          {questions.length === 0 ? (
-            <div className='no-questions'>
-              <p>Ainda não há perguntas feitas nesta sala</p>
-            </div>
-          ) : (
-            questions.map(({ id, isAnswered, ...rest }) => (
-              <Question key={id} isAnswered={isAnswered} {...rest}>
-                {!isAnswered && (
+          <div className='question-list'>
+            {questions.length === 0 ? (
+              <div className='no-questions'>
+                <img src={EMPTY_QUESTIONS} alt='Sala sem perguntas' />
+
+                <p>Ainda não há perguntas feitas nesta sala</p>
+              </div>
+            ) : (
+              questions.map(({ id, isAnswered, ...rest }) => (
+                <Question key={id} isAnswered={isAnswered} {...rest}>
+                  {!isAnswered && (
+                    <>
+                      <button
+                        type='button'
+                        onClick={async () =>
+                          await handleCheckQuestionAsAnswered(id)
+                        }
+                      >
+                        <img
+                          src={CHECK}
+                          alt='Marcar pergunta como respondida'
+                          title='Marcar pergunta como respondida'
+                        />
+                      </button>
+                      <button
+                        type='button'
+                        onClick={async () => await handleHighlightQuestion(id)}
+                      >
+                        <img
+                          src={ANSWER}
+                          alt='Dar destaque à pergunta'
+                          title='Dar destaque à pergunta'
+                        />
+                      </button>
+                    </>
+                  )}
                   <button
                     type='button'
-                    onClick={async () =>
-                      await handleCheckQuestionAsAnswered(id)
-                    }
+                    onClick={() => handleOpenDeleteQuestionModal(id)}
                   >
                     <img
-                      src={CHECK}
-                      alt='Marcar pergunta como respondida'
-                      title='Marcar pergunta como respondida'
+                      src={DELETE}
+                      alt='Remover pergunta'
+                      title='Remover pergunta'
                     />
                   </button>
-                )}
-                <button
-                  type='button'
-                  onClick={async () => await handleHighlightQuestion(id)}
-                >
-                  <img
-                    src={ANSWER}
-                    alt='Dar destaque à pergunta'
-                    title='Dar destaque à pergunta'
-                  />
-                </button>
-                <button
-                  type='button'
-                  onClick={async () => await handleDeleteQuestion(id)}
-                >
-                  <img
-                    src={DELETE}
-                    alt='Remover pergunta'
-                    title='Remover pergunta'
-                  />
-                </button>
-              </Question>
-            ))
-          )}
-        </div>
-      </main>
-    </div>
+                </Question>
+              ))
+            )}
+          </div>
+        </main>
+      </div>
+
+      <Modal
+        isOpen={isOpenEndRoomModal}
+        variant='room'
+        title='Encerrar sala'
+        description='Tem certeza que você deseja encerrar esta sala?'
+        onClose={() => setIsOpenEndRoomModal(false)}
+        onRequestClose={() => setIsOpenEndRoomModal(false)}
+        onFinish={async () => await handleEndRoom()}
+      />
+
+      <Modal
+        isOpen={isOpenDeleteQuestionModal}
+        variant='question'
+        title='Excluir pergunta'
+        description='Tem certeza que você deseja excluir esta pergunta?'
+        onClose={() => setIsOpenDeleteQuestionModal(false)}
+        onRequestClose={() => setIsOpenDeleteQuestionModal(false)}
+        onFinish={async () => await handleDeleteQuestion(questionIdToBeDeleted)}
+      />
+    </>
   );
 }

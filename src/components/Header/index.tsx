@@ -25,7 +25,7 @@ export function Header({ roomId, variant = 'user', onClick }: HeaderProps) {
           <div>
             <RoomCode code={roomId} />
 
-            <Button isOutlined onClick={onClick}>
+            <Button variant='outlined' onClick={onClick}>
               Encerrar sala
             </Button>
           </div>
