@@ -1,6 +1,7 @@
 export * from './Banner';
 export * from './Button';
 export * from './Header';
+export * from './Icon';
 export * from './InputText';
 export * from './Modal';
 export * from './Question';
