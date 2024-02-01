@@ -5,13 +5,14 @@ import {
   FirebaseRoomProps,
   ParsedQuestionProps,
 } from '../@types';
-import { RoomHookProps } from '../@types/hooks/useRoom';
+import { RoomHookProps } from '../@types';
 import { database, databaseRef, onValueInDatabase } from '../config';
 import { useAuth } from './useAuth';
 
 export function useRoom(roomId: string): RoomHookProps {
   const { user } = useAuth();
 
+  const [isClosed, setIsClosed] = useState<boolean>(false);
   const [title, setTitle] = useState<string>('');
   const [questions, setQuestions] = useState<ParsedQuestionProps[]>([]);
 
@@ -32,6 +33,7 @@ export function useRoom(roomId: string): RoomHookProps {
         }),
       );
 
+      setIsClosed(!!roomValue.closedAt);
       setTitle(roomValue.title);
       setQuestions(parsedQuestions);
     });
@@ -41,5 +43,5 @@ export function useRoom(roomId: string): RoomHookProps {
     };
   }, [roomId, user?.id]);
 
-  return { questions, title };
+  return { isClosed, questions, title };
 }

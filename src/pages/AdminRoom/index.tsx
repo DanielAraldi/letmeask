@@ -1,6 +1,6 @@
 import '../../styles/room.scss';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { FirebaseParsedQuestionProps, RoomParamsProps } from '../../@types';
@@ -16,14 +16,15 @@ import {
   DELETE,
   EMPTY_QUESTIONS,
 } from '../../config';
-import { useRoom } from '../../hooks';
+import { useRoom, useToast } from '../../hooks';
 
 export function AdminRoom() {
   const navigate = useNavigate();
   const params = useParams<keyof RoomParamsProps>();
   const roomId = params.id!;
 
-  const { questions, title } = useRoom(roomId);
+  const { showErrorAlert } = useToast();
+  const { questions, title, isClosed } = useRoom(roomId);
 
   const [questionIdToBeDeleted, setQuestionIdToBeDeleted] =
     useState<string>('');
@@ -73,6 +74,13 @@ export function AdminRoom() {
       isHighlighted: !question.isHighlighted,
     });
   }
+
+  useEffect(() => {
+    if (isClosed) {
+      showErrorAlert('Está sala já foi encerrada!');
+      navigate('/not-found', { replace: true });
+    }
+  }, [roomId, isClosed]);
 
   return (
     <>

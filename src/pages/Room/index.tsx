@@ -1,7 +1,7 @@
 import '../../styles/room.scss';
 
 import cx from 'classnames';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { RoomParamsProps } from '../../@types';
@@ -27,8 +27,8 @@ export function Room() {
   const roomId = params.id!;
 
   const { user } = useAuth();
-  const { questions, title } = useRoom(roomId);
   const { showErrorAlert } = useToast();
+  const { questions, title, isClosed } = useRoom(roomId);
 
   const [newQuestion, setNewQuestion] = useState<string>('');
 
@@ -86,6 +86,13 @@ export function Room() {
       });
     }
   }
+
+  useEffect(() => {
+    if (isClosed) {
+      showErrorAlert('Está sala já foi encerrada!');
+      navigate('/not-found', { replace: true });
+    }
+  }, [roomId, isClosed]);
 
   return (
     <div id='page-room'>
