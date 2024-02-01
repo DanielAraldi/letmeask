@@ -26,7 +26,7 @@ export function Question({
       <footer>
         <UserInfo name={author.name} avatar={author.avatar || null} />
 
-        <div>{children}</div>
+        <div className='children'>{children}</div>
       </footer>
     </div>
   );

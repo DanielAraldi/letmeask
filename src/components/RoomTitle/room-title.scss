@@ -23,5 +23,17 @@
     background: var(--purple);
 
     border-radius: 9999px;
+
+    @media (max-width: 432px) {
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 432px) {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 0.5rem;
   }
 }

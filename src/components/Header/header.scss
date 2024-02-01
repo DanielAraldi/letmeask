@@ -17,11 +17,21 @@
       max-height: 2.813rem;
 
       cursor: pointer;
+
+      @media (max-width: 768px) {
+        display: none;
+      }
     }
 
     > div {
       display: flex;
       gap: 1rem;
+
+      @media (max-width: 768px) {
+        width: 100%;
+
+        justify-content: space-between;
+      }
 
       button {
         height: 2.5rem;

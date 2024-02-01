@@ -40,6 +40,10 @@ textarea {
   font:
     400 1rem 'Roboto',
     sans-serif;
+
+  @media (max-width: 768px) {
+    font-size: 90%;
+  }
 }
 
 .toast {

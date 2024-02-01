@@ -20,5 +20,9 @@
       font-weight: 500;
       color: var(--black-text);
     }
+
+    @media (max-width: 512px) {
+      margin-left: 0;
+    }
   }
 }
