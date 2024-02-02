@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/DanielAraldi/letmeask/compare/v1.0.0...v1.0.1) (2024-02-02)
+
+
+### Bug Fixes
+
+* remove incorrect alert that it's shown when user wasn't authenticated ([a90f71d](https://github.com/DanielAraldi/letmeask/commit/a90f71dbe17b9a08e627e01ef089f0c9a959e47f))
+
 ## 1.0.0 (2024-02-02)
 
 
