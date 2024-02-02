@@ -37,9 +37,10 @@ export function Home() {
 
     if (isInputEmpty) return;
 
+    const roomCodeTrimmed = roomCode.trim();
     const roomsRef = databaseRef(database);
     const room = await databaseGet(
-      databaseChild(roomsRef, `rooms/${roomCode.trim()}`),
+      databaseChild(roomsRef, `rooms/${roomCodeTrimmed}`),
     );
     const roomValue: FirebaseRoomProps = room.val();
 
@@ -50,7 +51,7 @@ export function Home() {
         return showErrorAlert('Sala já foi encerrada!');
       }
       const isAdmin = roomValue.authorId === user?.id;
-      navigate(`${isAdmin ? '/admin' : ''}/rooms/${roomCode}`);
+      navigate(`${isAdmin ? '/admin' : ''}/rooms/${roomCodeTrimmed}`);
     }
   }
 
