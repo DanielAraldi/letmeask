@@ -57,7 +57,6 @@ export function AuthProvider({ children }: Required<PropsWithChildren>) {
           avatar: photoURL,
         });
       } else {
-        showErrorAlert('Sua autenticação falhou, tente novamente!');
         handleUserStateLogged(false);
         setUser(null);
       }
